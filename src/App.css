@@ -1,51 +1,57 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 
 .App-intro {
-  font-size: large;
+    font-size: large;
 }
 
 .Chat-box {
-  position: relative;
-  margin: 0 auto;
-  width: 350px;
-  height: 400px;
-  background-color: ghostwhite;
-  border: 3px solid lightblue;
-  border-radius: 3px;
+    position: relative;
+    margin: 0 auto;
+    width: 350px;
+    height: 400px;
+    background-color: ghostwhite;
+    border: 3px solid lightblue;
+    border-radius: 3px;
 
 }
 
 .Messages-box {
-  position: absolute;
-  text-align: left;
-  padding: 10px;
-  height: 300px;
-  overflow-y: scroll;
+    position: absolute;
+    text-align: left;
+    padding: 10px;
+    width: 330px;
+    height: 300px;
+    overflow-y: scroll;
 
 }
 
 .Usertext-box {
-  position: absolute;
-  padding: 10px;
-  bottom: 0;
-  height: 60px;
+    position: absolute;
+    padding: 10px;
+    bottom: 0;
+    height: 60px;
 
 }
 
 .textbox {
-  width: 317px;
-  /*height: 50px;*/
-  height: 30px;
-  padding: 5px;
-  resize: none;
-  font-size: medium;
-  outline: none;
-  border: 2px solid darkgrey;
-  border-radius: 3px;
+    width: 317px;
+    /*height: 50px;*/
+    height: 30px;
+    padding: 5px;
+    resize: none;
+    font-size: medium;
+    outline: none;
+    border: 2px solid darkgrey;
+    border-radius: 3px;
 }
 
+
+.user-name {
+    font-weight: bold;
+
+}
 
 

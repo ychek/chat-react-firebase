@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
 import './App.css';
 import Message from './components/Message'
+import * as firebase from 'firebase'
 
 
 class App extends Component {
 
     constructor() {
-        /* no need of 'props' as param in the constructor() and super() (because we don't use props inside
-         the constructor logic) */
         super();
+        /* no need of 'props' as param for constructor() and super() because we don't use props inside
+         the constructor logic */
         this.updateUserMsg = this.updateUserMsg.bind(this);
         this.postUserMsg = this.postUserMsg.bind(this);
 
         this.state = {
-            userMessage : '',
-            //real object structure
-            // messages : [
-            //     {name: 'user1', msg: 'Hello', timestamp: Date.now() },
-            //     {name: 'user2', msg: 'Helloooo', timestamp: Date.now()},
-            //     {name: 'user3', msg: 'Hello text 3', timestamp: Date.now()},
-            //     {name: 'user4', msg: 'Hello text4', timestamp: Date.now()},
-            // ],
-
-            // simple object for debug
-            messages : [
-                // 'helllo message',
-                // 'other message'
-            ]
+            userMessage: '',
+            messages: [
+                // {name: 'user1', msg: 'Hello', timestamp: Date.now() },
+                // {name: 'user2', msg: 'Helloooo', timestamp: Date.now()},
+                // {name: 'user3', msg: 'Hello text 3', timestamp: Date.now()},
+                // {name: 'user4', msg: 'Hello text4', timestamp: Date.now()},
+            ],
         }
 
     }
@@ -38,20 +32,43 @@ class App extends Component {
     }
 
     postUserMsg(event) {
-        const username = this.state.username;
-        // const newMsgToBePosted = {
-        //     name: username,
-        //     msg: this.state.userMessage,
-        //     timestamp: Date.now()
-        // };
+        const username = this.props.username;
+        const newMsgToBePosted = {
+            name: username,
+            msg: this.state.userMessage,
+            timestamp: Date.now()
+        };
 
         console.log(username + " clicked submit");
-        let allMessages = Object.assign([], this.state.messages);
 
-        allMessages.push(this.state.userMessage); // Simple msg for debug
-        // allMessages.push(newMsgToBePosted); // real object
+        firebase.database().ref('messages/'+newMsgToBePosted.name).set(newMsgToBePosted);
+
+
+        // let allMessages = Object.assign([], this.state.messages);
+        //
+        // allMessages.push(newMsgToBePosted);
+        //
+        // if (this.state.userMessage) { //prevent sending empty messages
+        //     // update the state with the new user message added
+        //     this.setState({messages: allMessages})
+        //}
     }
 
+
+    componentDidMount(){
+
+        firebase.database().ref('messages/').on('value', (snapshot) => {
+
+            const dbMessages = snapshot.val();
+
+            console.log(dbMessages);
+            // if (dbMessages){
+            //     this.setState({
+            //         messages: dbMessages
+            //     })
+            // }
+        })
+    }
 
     render() {
         return (
@@ -62,8 +79,9 @@ class App extends Component {
                 <div className="Chat-box">
                     <div className="Messages-box">
                         {
-                            this.state.messages.map((msg, idx) =>
-                                <Message key={idx} usermsg={msg} />
+                            this.state.messages.map((msg, idx) => {
+                                    return (<Message key={idx} userMsg={msg}/>)
+                                }
                             )
                         }
                     </div>
