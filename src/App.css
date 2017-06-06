@@ -18,6 +18,47 @@
   font-size: large;
 }
 
+.Chat-box {
+  position: relative;
+  margin: 0 auto;
+  width: 350px;
+  height: 400px;
+  background-color: ghostwhite;
+  border: 5px solid lightblue;
+
+}
+
+.Messages-box {
+  position: absolute;
+  text-align: left;
+  padding: 10px;
+  height: 300px;
+  overflow-y: scroll;
+
+}
+
+.Usertext-box {
+  position: absolute;
+  padding: 10px;
+  bottom: 0;
+  height: 60px;
+
+}
+
+.textbox {
+  width: 330px;
+  height: 100%;
+  resize: none;
+  font-size: medium;
+  padding: 0;
+  outline: none;
+  border: 2px solid darkgrey;
+}
+
+
+
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
