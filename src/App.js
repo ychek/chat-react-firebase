@@ -6,16 +6,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/*<div className="App-header">*/}
-          {/*<img src={logo} className="App-logo" alt="logo" />*/}
-          {/*<h2>Welcome to React</h2>*/}
-        {/*</div>*/}
         <p className="App-intro">
             Hello {this.props.username} welcome to our chatroom!
         </p>
           <div className="Chat-box">
               <div className="Messages-box">
-                  <p>user1 : text1</p>
+                  <p><span>user1 :</span> text1</p>
                   <p>user2 : text2</p>
                   <p>user3 : text3</p>
                   <p>user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3user3 : text3</p>
@@ -23,7 +19,6 @@ class App extends Component {
               <div className="Usertext-box">
                   <textarea className="textbox"/>
               </div>
-
           </div>
       </div>
     );

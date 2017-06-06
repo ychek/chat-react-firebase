@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
 
 .App-intro {
   font-size: large;
@@ -24,7 +13,8 @@
   width: 350px;
   height: 400px;
   background-color: ghostwhite;
-  border: 5px solid lightblue;
+  border: 3px solid lightblue;
+  border-radius: 3px;
 
 }
 
@@ -46,20 +36,15 @@
 }
 
 .textbox {
-  width: 330px;
-  height: 100%;
+  width: 317px;
+  height: 50px;
+  padding: 5px;
   resize: none;
   font-size: medium;
-  padding: 0;
   outline: none;
   border: 2px solid darkgrey;
+  border-radius: 3px;
 }
 
 
 
-
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
