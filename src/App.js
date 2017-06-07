@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
 import Message from './components/Message'
 import * as firebase from 'firebase'
@@ -35,6 +36,10 @@ class App extends Component {
 
     }
 
+    scrollToBottom = () => {
+        const node = ReactDOM.findDOMNode(this.messagesEnd);
+        node.scrollIntoView({ behavior: "smooth" });
+    };
 
     updateUserMsg(event) {
         this.setState({
@@ -60,17 +65,22 @@ class App extends Component {
 
 
     componentDidMount(){
-
         firebase.database().ref('messages/').on('value', snap => {
 
             const dbMessages = snap.val();
-            console.log(dbMessages);
             if (dbMessages){
                 this.setState({
                     messages: dbMessages
                 })
             }
-        })
+        });
+        this.scrollToBottom();
+
+    }
+
+    componentDidUpdate(){
+        this.scrollToBottom();
+
     }
 
     render() {
@@ -88,7 +98,13 @@ class App extends Component {
                                 }
                             )
                         }
+                        {/*empty div for the auto scrolling mechanism */}
+                        <div style={{ float:"left", clear: "both" }}
+                             ref={(el) => { this.messagesEnd = el; }} />
                     </div>
+
+
+
                     <div className="Usertext-box">
                         <textarea value={this.state.userMessage} placeholder="Send a message..." onChange={this.updateUserMsg} onKeyPress={this.handleEnterKeyPress} className="textbox"/>
                     </div>
