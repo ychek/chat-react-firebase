@@ -20,13 +20,13 @@ firebase.initializeApp(config);
 
 
 function getUserName() {
-    let person = prompt("Please choose a username", "Username");
+    const person = prompt("Please choose a username", "username");
     if (person) {
        return person;
     }
     //Generate a username if not given
     else {
-        let randomNumber = getRandomInt(0, 1000);
+        const randomNumber = getRandomInt(0, 1000);
         return "user" + randomNumber;
     }
 }

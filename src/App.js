@@ -34,39 +34,31 @@ class App extends Component {
     postUserMsg(event) {
         const username = this.props.username;
         const newMsgToBePosted = {
+            id: this.state.messages.length,
             name: username,
             msg: this.state.userMessage,
             timestamp: Date.now()
         };
 
-        console.log(username + " clicked submit");
+        if (newMsgToBePosted.msg) { //prevent sending empty messages
+            firebase.database().ref('messages/' + newMsgToBePosted.id).set(newMsgToBePosted);
+        }
 
-        firebase.database().ref('messages/'+newMsgToBePosted.name).set(newMsgToBePosted);
 
-
-        // let allMessages = Object.assign([], this.state.messages);
-        //
-        // allMessages.push(newMsgToBePosted);
-        //
-        // if (this.state.userMessage) { //prevent sending empty messages
-        //     // update the state with the new user message added
-        //     this.setState({messages: allMessages})
-        //}
     }
 
 
     componentDidMount(){
 
-        firebase.database().ref('messages/').on('value', (snapshot) => {
+        firebase.database().ref('messages/').on('value', snap => {
 
-            const dbMessages = snapshot.val();
+            const dbMessages = snap.val();
 
-            console.log(dbMessages);
-            // if (dbMessages){
-            //     this.setState({
-            //         messages: dbMessages
-            //     })
-            // }
+            if (dbMessages){
+                this.setState({
+                    messages: dbMessages
+                })
+            }
         })
     }
 
@@ -79,6 +71,7 @@ class App extends Component {
                 <div className="Chat-box">
                     <div className="Messages-box">
                         {
+
                             this.state.messages.map((msg, idx) => {
                                     return (<Message key={idx} userMsg={msg}/>)
                                 }
