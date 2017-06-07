@@ -12,6 +12,7 @@ class App extends Component {
          the constructor logic */
         this.updateUserMsg = this.updateUserMsg.bind(this);
         this.postUserMsg = this.postUserMsg.bind(this);
+        this.handleEnterKeyPress = this.handleEnterKeyPress.bind(this);
 
         this.state = {
             userMessage: '',
@@ -20,13 +21,28 @@ class App extends Component {
 
     }
 
+    handleEnterKeyPress(event) {
+
+        if (event.key === 'Enter') {
+            this.postUserMsg();
+            // clear the text area after submitting
+            this.setState({
+                userMessage: ''
+            })
+
+
+        }
+
+    }
+
+
     updateUserMsg(event) {
         this.setState({
             userMessage: event.target.value
         })
     }
 
-    postUserMsg(event) {
+    postUserMsg() {
         const username = this.props.username;
         const newMsgToBePosted = {
             name: username,
@@ -34,7 +50,8 @@ class App extends Component {
             timestamp: Date.now()
         };
 
-        if (newMsgToBePosted.msg) { //prevent sending empty messages
+        if (newMsgToBePosted.msg.trim()) {
+            //prevent sending empty messages or with only whitespaces
             firebase.database().ref('messages/' + this.state.messages.length).set(newMsgToBePosted);
         }
 
@@ -73,8 +90,7 @@ class App extends Component {
                         }
                     </div>
                     <div className="Usertext-box">
-                        <textarea onChange={this.updateUserMsg} className="textbox"/>
-                        <button onClick={this.postUserMsg}>Post</button>
+                        <textarea value={this.state.userMessage} placeholder="Send a message..." onChange={this.updateUserMsg} onKeyPress={this.handleEnterKeyPress} className="textbox"/>
                     </div>
                 </div>
             </div>
